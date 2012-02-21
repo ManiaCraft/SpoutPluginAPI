@@ -58,6 +58,9 @@ public class GenericContainer extends GenericWidget implements Container {
 		} else {
 			this.children.add(index, child);
 		}
+		if (!child.hasContainer() || child.getContainer().isVisible() != isVisible()) {
+			child.autoDirty();
+		}
 		child.setContainer(this);
 		child.savePos();
 		child.shiftXPos(super.getX());
@@ -105,7 +108,7 @@ public class GenericContainer extends GenericWidget implements Container {
 		if (enable != isVisible()) {
 			super.setVisible(enable);
 			for (Widget widget : children) {
-				widget.setVisible(enable);
+				widget.autoDirty();
 			}
 		}
 		return this;

@@ -290,6 +290,9 @@ public abstract class GenericWidget extends AbstractEventSource implements Widge
 
 	@Override
 	public boolean isVisible() {
+		if (hasContainer()) {
+			return visible && getContainer().isVisible();
+		}
 		return visible;
 	}
 
